@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 #extract text from a text file and output the lines containing that text to a new file
+#v0.1
 def select_file():
     while True:
         file_path = input("File path to read: ")
