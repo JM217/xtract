@@ -3,9 +3,19 @@
 #easily clean up files by removing unwanted strings
 #v0.2
 #Author - JM217
+print("""\
+██╗  ██╗████████╗██████╗  █████╗  ██████╗████████╗
+╚██╗██╔╝╚══██╔══╝██╔══██╗██╔══██╗██╔════╝╚══██╔══╝
+ ╚███╔╝    ██║   ██████╔╝███████║██║        ██║   
+ ██╔██╗    ██║   ██╔══██╗██╔══██║██║        ██║   
+██╔╝ ██╗   ██║   ██║  ██║██║  ██║╚██████╗   ██║   
+╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝   ╚═╝ 
+by JM217
+""")
+
 def select_file():
     while True:
-        file_path = input("Enter the path to the file you want to read: ")
+        file_path = input("Input file: ")
         try:
             with open(file_path, 'r') as file:
                 return file.readlines()
@@ -30,20 +40,20 @@ def main():
     print("Select File:")
     lines = select_file()
 
-    action = input("Enter the action you want to perform:\n"
-                   "1. Extract lines containing a specific string and write to a new file.\n"
-                   "2. Remove characters from the file and write to a new file.\n")
+    action = input("Select an option:\n"
+                   "1. Extract lines containing a specific string.\n"
+                   "2. Remove characters from a file.\n")
 
     if action == "1":
         search_string = input("Enter the string you want to search for: ")
         filtered_lines = extract_lines(lines, search_string)
-        output_file = input("Enter the path for the output file with filtered lines: ")
+        output_file = input("Output file: ")
         write_to_file(filtered_lines, output_file)
         print(f"Filtered lines containing '{search_string}' have been written to '{output_file}'.")
     elif action == "2":
         characters_to_remove = input("Enter the characters you want to remove from the original file: ")
         modified_lines = remove_characters(lines, characters_to_remove)
-        output_file = input("Enter the path for the output file with modified lines: ")
+        output_file = input("Output file: ")
         write_to_file(modified_lines, output_file)
         print(f"Modified file with characters removed has been written to '{output_file}'.")
     else:
