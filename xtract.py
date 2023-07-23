@@ -2,6 +2,7 @@
 #extract text from a text file and output the lines containing that text to a new file
 #easily clean up files by removing unwanted strings
 #v0.2
+#Author - JM217
 def select_file():
     while True:
         file_path = input("Enter the path to the file you want to read: ")
