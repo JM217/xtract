@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 #extract text from a text file and output the lines containing that text to a new file
-#v0.1
+#easily clean up files by removing unwanted strings
+#v0.2
 def select_file():
     while True:
-        file_path = input("File path to read: ")
+        file_path = input("Enter the path to the file you want to read: ")
         try:
             with open(file_path, 'r') as file:
                 return file.readlines()
@@ -11,12 +12,12 @@ def select_file():
             print("File not found. Please enter a valid file path.")
 
 
-def specify_string():
-    return input("String to search for: ")
-
-
 def extract_lines(lines, search_string):
     return [line for line in lines if search_string in line]
+
+
+def remove_characters(lines, characters_to_remove):
+    return [line.replace(characters_to_remove, "") for line in lines]
 
 
 def write_to_file(lines, output_file):
@@ -28,16 +29,24 @@ def main():
     print("Select File:")
     lines = select_file()
 
-    print("\nSpecify String:")
-    search_string = specify_string()
+    action = input("Enter the action you want to perform:\n"
+                   "1. Extract lines containing a specific string and write to a new file.\n"
+                   "2. Remove characters from the file and write to a new file.\n")
 
-    filtered_lines = extract_lines(lines, search_string)
-
-    output_file = input("Output file: ")
-
-    write_to_file(filtered_lines, output_file)
-
-    print(f"Filtered lines containing '{search_string}' have been written to '{output_file}'.")
+    if action == "1":
+        search_string = input("Enter the string you want to search for: ")
+        filtered_lines = extract_lines(lines, search_string)
+        output_file = input("Enter the path for the output file with filtered lines: ")
+        write_to_file(filtered_lines, output_file)
+        print(f"Filtered lines containing '{search_string}' have been written to '{output_file}'.")
+    elif action == "2":
+        characters_to_remove = input("Enter the characters you want to remove from the original file: ")
+        modified_lines = remove_characters(lines, characters_to_remove)
+        output_file = input("Enter the path for the output file with modified lines: ")
+        write_to_file(modified_lines, output_file)
+        print(f"Modified file with characters removed has been written to '{output_file}'.")
+    else:
+        print("Invalid option. Please enter either '1' or '2'.")
 
 
 if __name__ == "__main__":
